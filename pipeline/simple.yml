@@ -1,0 +1,19 @@
+---
+resources:
+  - name: source-code
+    type: git
+    source:
+      uri: https://github.com/elenorebastian/build-service-sample-app.git
+      branch: master
+  - name: unit-test
+    plan:
+      - get: source-code
+        trigger: true
+      - task: run the unit tests
+        file: source-code/pipeline/unit-test.yml
+
+#on unit-test pass then build image
+#once image is build then push to k8s?
+
+#update builder also triggers a change
+
