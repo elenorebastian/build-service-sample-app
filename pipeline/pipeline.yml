@@ -1,0 +1,49 @@
+---
+resource_types:
+  - name: kpack-image
+    type: registry-image
+    source:
+      repository: gcr.io/cf-build-service-public/concourse-kpack-resource
+
+resources:
+  - name: source-code
+    type: git
+    source:
+      uri: https://github.com/elenorebastian/build-service-sample-app.git
+      branch: master
+
+  - name: build-service-sample-app
+    type: kpack-image
+    source:
+      image: "elenorevmare/build-service-sample-app"
+      namespace: default
+      gke:
+        json_key: ((service-account-key))
+        kubeconfig: ((kubeconfig))
+
+jobs:
+  - name: unit-test
+    plan:
+      - get: source-code
+        trigger: true
+      - task: run unit tests
+        file: source-code/pipeline/unit-test.yml
+      - put: build-service-sample-app
+        params:
+          commitish: source-code/.git/ref
+
+  - name: deploy image to cluster
+    plan:
+      - get: source-code
+      - get: build-service-sample-app
+        trigger: true
+      - task: build kubenetes Deployment and apply to cluster
+        file: source-code/pipeline/deploy-image.yml
+        params:
+          KUBECONFIG: ((kubeconfig))
+
+
+
+
+
+

@@ -1,3 +1,10 @@
 #!/bin/sh
 
-gradle build  && gradle test
+set -e -u -
+
+cd source-code/
+./gradlew build
+./gradlew test
+
+
+

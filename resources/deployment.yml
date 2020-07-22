@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: build-service-sample-app
+  labels:
+    app: build-service-sample-app
+spec:
+  selector:
+    matchLabels:
+      app: build-service-sample-app
+  template:
+    metadata:
+      labels:
+        app: build-service-sample-app
+    spec:
+      containers:
+        - name: build-service-sample-app
+          image: elenorevmware/build-service-sample-app
+          ports:
+            - containerPort: 8080

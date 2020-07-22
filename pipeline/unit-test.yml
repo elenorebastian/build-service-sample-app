@@ -1,11 +1,12 @@
 ---
 platform: linux
+
 image_resource:
-  type: registry-image
-  source:
-    repository: ubuntu:bionic
+  type: docker-image
+  source: {repository: java, tag: openjdk-8-alpine}
 
 inputs:
-  - source-code
+  - name: source-code
 run:
   path: source-code/pipeline/unit-test.sh
+

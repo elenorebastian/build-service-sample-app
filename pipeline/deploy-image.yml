@@ -1,0 +1,14 @@
+---
+platform: linux
+
+image_resource:
+  type: docker-image
+  source: {repository: alpine, tag: k8s}
+
+params:
+  KUBECONFIG:
+inputs:
+  - name: build-service-sample-app
+run:
+  path: source-code/pipeline/deploy.sh
+

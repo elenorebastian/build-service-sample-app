@@ -1,0 +1,14 @@
+apiVersion: build.pivotal.io/v1alpha1
+kind: Image
+metadata:
+  name: build-service-sample-app
+spec:
+  tag: elenorevmware/build-service-sample-app
+  serviceAccount: sample-app-service-account
+  builder:
+    name: default
+    kind: ClusterBuilder
+  source:
+    git:
+      url: https://github.com/elenorebastian/build-service-sample-app.git
+      revision: ffe4347b511ed7969daf481fa4d16171fe35301d
