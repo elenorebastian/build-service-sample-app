@@ -7,6 +7,8 @@ echo $KUBECONFIG > $HOME/.kube/config
 
 image=$(cat build-service-sample-app/image)
 
+echo $image
+
 cat << EOF
 apiVersion: apps/v1
 kind: Deployment

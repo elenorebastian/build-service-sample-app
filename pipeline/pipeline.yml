@@ -15,7 +15,7 @@ resources:
   - name: build-service-sample-app
     type: kpack-image
     source:
-      image: "elenorevmare/build-service-sample-app"
+      image: "build-service-sample-app"
       namespace: default
       gke:
         json_key: ((service-account-key))
@@ -32,12 +32,12 @@ jobs:
         params:
           commitish: source-code/.git/ref
 
-  - name: deploy image to cluster
+  - name: deploy-image-to-cluster
     plan:
       - get: source-code
       - get: build-service-sample-app
         trigger: true
-      - task: build kubenetes Deployment and apply to cluster
+      - task: build-kubenetes-deployment-and-apply-to-cluster
         file: source-code/pipeline/deploy-image.yml
         params:
           KUBECONFIG: ((kubeconfig))
