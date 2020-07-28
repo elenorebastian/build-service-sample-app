@@ -180,7 +180,7 @@ I was able to verify that by running a quick `docker pull elenorevmware/build-se
 
 ## CI/CD
 
-Now lets talk about how to incorporate these tools into CI/CD pipeline. I will be using Concourse to set up my pipeline. 
+Now lets talk about how to incorporate these tools into a CI/CD pipeline. I will be using Concourse to set up my pipeline. 
 You can find all my pipeline jobs, tasks, and scripts in the `pipeline/` directory.
 
 1. First, lets create a tasks that runs our app's unit tests.
@@ -229,7 +229,7 @@ resources:
   - name: build-service-sample-app
     type: kpack-image
     source:
-      image: "elenorevmare/build-service-sample-app"
+      image: "build-service-sample-app"
       namespace: default
       gke:
         json_key: ((service-account-key))
@@ -270,9 +270,6 @@ A passed constraint on `unit-test` would exclude deploying images that were buil
 (meaning your app could miss out on those sweet sweet CVE updates 😭)
 
 Please take a look at the deploy task and script found in the `pipeline/` directory!
-
-## Next Steps
-Soon to come we will be exploring how to set up integration testing with your app and kpack!
 
 
 
