@@ -1,3 +1,4 @@
+#@ load("@ytt:data", "data")
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -15,6 +16,6 @@ spec:
     spec:
       containers:
         - name: build-service-sample-app
-          image: elenorevmware/build-service-sample-app
+          image: #@ data.values.image
           ports:
             - containerPort: 8080

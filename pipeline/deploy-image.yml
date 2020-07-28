@@ -9,6 +9,7 @@ params:
   KUBECONFIG:
 inputs:
   - name: build-service-sample-app
+  - name: source-code
 run:
   path: source-code/pipeline/deploy.sh
 
